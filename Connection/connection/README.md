@@ -1,6 +1,6 @@
 | Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C6 | ESP32-H2 | ESP32-P4 | ESP32-S2 | ESP32-S3 |
 | ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
-# __Communication Project__
+# __connection Project__
 
 **This project demonstrates UART communication between two ESP32 devices. It includes functions for sending and receiving 'charArray', 'char', and 'uint8' data types, as well as functions for clearing the buffer, setting a timeout, and checking buffer availability.**
 **To achieve this, the RX and TX pins of the UART are connected to GPIO16 and GPIO17 respectively.**
@@ -14,7 +14,7 @@ For windows users:step 3,4,5,6 can use gui
 2. _Clone the repository and navigate to the project directory:_  
     ```bash
    git clone git@github.com:${Username}/NTUEECamp_2024_Gameconsole.git #using ssh    
-   cd NTUEECamp_2024_Gameconsole/Connection/communication
+   cd NTUEECamp_2024_Gameconsole/Connection/connection
 3. _Copy the project:_  
     copy the project in your device and open the project in your workplace
 4. _Build the project:_
@@ -31,12 +31,12 @@ Replace /dev/ttyUSB0 with your serial port.
     idf.py -p /dev/ttyUSB0 monitor
 
 ## Project Structure
-The Communication Project consists of two source files and one header file written in C. The main application logic is implemented in [main.c](main/main.c), located within the main directory.<br><br> Additionally, the functionality is extended by [uartFunction.c](components/uartFunction/src/uartFunction.c) and its corresponding header file [uartFunction.h](components/uartFunction/include/uartFunction.h).<br><br>
+The connection Project consists of two source files and one header file written in C. The main application logic is implemented in [main.c](main/main.c), located within the main directory.<br><br> Additionally, the functionality is extended by [uartFunction.c](components/uartFunction/src/uartFunction.c) and its corresponding header file [uartFunction.h](components/uartFunction/include/uartFunction.h).<br><br>
 This project utilizes ESP-IDF and is built using the CMake build system. The configuration for building the project can be found in the three CMakeLists.txt file.
 
 The project is organized as follows:
 
-communication/  
+connection/  
 ├── components/  
 │  &nbsp;&nbsp;&nbsp;&nbsp; └── uartFunction/  
 │      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── CMakeLists.txt  
