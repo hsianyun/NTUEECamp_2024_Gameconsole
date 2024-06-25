@@ -2,25 +2,12 @@
 #include "freertos/FreeRTOS.h"
 
 #include <string.h>
-#include "driver/uart.h"
 #include "uartFunction.h"
 // 全域變數
 char* array;
 uint8_t numm;
 char ch;
-
 void setup() {
-    // 初始化 UART0 用于print输出
-    const uart_config_t uart_config = {
-        .baud_rate = 115200,
-        .data_bits = UART_DATA_8_BITS,
-        .parity = UART_PARITY_DISABLE,
-        .stop_bits = UART_STOP_BITS_1,
-        .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
-        .source_clk = UART_SCLK_APB,
-    };
-    uart_param_config(UART_NUM_0, &uart_config);
-    uart_driver_install(UART_NUM_0, 256, 0, 0, NULL, 0);
     // 配置 UART
     uartSetup();
     // 初始化测试数据
@@ -29,7 +16,7 @@ void setup() {
     numm = 85;
     ch = 'y';
     //初始化timeout
-    setTimeoutMs(75);
+    setTimeoutMs(200);
 }
 
 void loop() {
@@ -40,7 +27,7 @@ void loop() {
     sendUint8(numm);
     sendChar(ch);
 
-    vTaskDelay(200/portTICK_PERIOD_MS);//每個loop 200ms(並等待數據傳進buffer)
+    vTaskDelay(500/portTICK_PERIOD_MS);//每個loop 500ms(並等待數據傳進buffer)
     printf("initial bufferavaliable:%d\n\n",receiveAvaliable());//應是118
 
     char* a = receiveCharArray();//接收char array
