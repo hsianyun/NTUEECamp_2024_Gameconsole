@@ -61,5 +61,9 @@ C:/Users/Evan/Desktop/communication/build/esp-idf/nvs_sec_provider/libnvs_sec_pr
 C:/Users/Evan/Desktop/communication/build/esp-idf/perfmon/libperfmon.a
 C:/Users/Evan/Desktop/communication/build/esp-idf/spiffs/libspiffs.a
 C:/Users/Evan/Desktop/communication/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
+<<<<<<< HEAD
 C:/Users/Evan/Desktop/communication/build/esp-idf/uratFunction/liburatFunction.a
+=======
+C:/Users/Evan/Desktop/communication/build/esp-idf/uartFunction/libuartFunction.a
+>>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
 C:/Users/Evan/Desktop/communication/build/esp-idf/main/libmain.a

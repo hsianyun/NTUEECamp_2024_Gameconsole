@@ -7,13 +7,18 @@
 
 ## Installation and Setup  
 To set up the project, follow these steps:  
+<<<<<<< HEAD
 For windows users:step 3,4,5 can use gui
+=======
+For windows users:step 3,4,5,6 can use gui
+>>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
 1. _Set up the ESP-IDF environment:_ 
    Follow the [ESP-IDF setup guide](https://docs.espressif.com/projects/esp-idf/en/release-v5.2/esp32/get-started/index.html) for your operating system.
 
 2. _Clone the repository and navigate to the project directory:_  
     ```bash
    git clone git@github.com:${Username}/NTUEECamp_2024_Gameconsole.git #using ssh    
+<<<<<<< HEAD
    cd NTUEECamp_2024_Gameconsole/tree/main/Connection/communication
 
 3. _Build the project:_
@@ -21,12 +26,25 @@ For windows users:step 3,4,5 can use gui
     idf.py build
 
 4. _Flash the firmware to your ESP32:_
+=======
+   cd NTUEECamp_2024_Gameconsole/Connection/communication
+3. _Copy the project:_  
+    copy the project in your device and open the project in your workplace
+4. _Build the project:_
+    ```bash
+    idf.py build
+5. _Flash the firmware to your ESP32:_
+>>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
     ```bash
     idf.py -p /dev/ttyUSB0 flash
 
 Replace /dev/ttyUSB0 with your serial port.
 
+<<<<<<< HEAD
 5. _Monitor the serial output using:_
+=======
+6. _Monitor the serial output using:_
+>>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
     ```bash
     idf.py -p /dev/ttyUSB0 monitor
 
