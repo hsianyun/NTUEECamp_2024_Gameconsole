@@ -1,5 +1,6 @@
 # ninja log v5
 <<<<<<< HEAD
+<<<<<<< HEAD
 10	313	7405913279861327	project_elf_src_esp32.c	1f2c0a2de3ae13ea
 10	313	7405913279861327	C:/Users/Evan/Desktop/communication/build/bootloader/project_elf_src_esp32.c	1f2c0a2de3ae13ea
 17	334	7405913280789203	esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/eri.c.obj	29dcd87f8d1f638d
@@ -132,6 +133,8 @@
 20	165	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	ff2ef488fad35c0f
 20	165	0	C:/Users/Evan/Desktop/communication/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	ff2ef488fad35c0f
 =======
+=======
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
 9	288	7410235782333296	project_elf_src_esp32.c	1f2c0a2de3ae13ea
 9	288	7410235782333296	C:/Users/Evan/Desktop/communication/build/bootloader/project_elf_src_esp32.c	1f2c0a2de3ae13ea
 15	308	7410235783458304	esp-idf/xtensa/CMakeFiles/__idf_xtensa.dir/eri.c.obj	29dcd87f8d1f638d
@@ -257,4 +260,7 @@
 11	114	0	C:/Users/Evan/Desktop/communication/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	ff2ef488fad35c0f
 12	123	0	esp-idf/esptool_py/CMakeFiles/bootloader_check_size	ff2ef488fad35c0f
 12	123	0	C:/Users/Evan/Desktop/communication/build/bootloader/esp-idf/esptool_py/CMakeFiles/bootloader_check_size	ff2ef488fad35c0f
+<<<<<<< HEAD
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a

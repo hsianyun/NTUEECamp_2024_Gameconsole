@@ -3,14 +3,18 @@
 
 #include <string.h>
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "driver/uart.h"
 =======
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
 #include "uartFunction.h"
 // 全域變數
 char* array;
 uint8_t numm;
 char ch;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 void setup() {
@@ -28,6 +32,9 @@ void setup() {
 =======
 void setup() {
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+void setup() {
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
     // 配置 UART
     uartSetup();
     // 初始化测试数据
@@ -37,10 +44,14 @@ void setup() {
     ch = 'y';
     //初始化timeout
 <<<<<<< HEAD
+<<<<<<< HEAD
     setTimeoutMs(75);
 =======
     setTimeoutMs(200);
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+    setTimeoutMs(200);
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
 }
 
 void loop() {
@@ -52,10 +63,14 @@ void loop() {
     sendChar(ch);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     vTaskDelay(200/portTICK_PERIOD_MS);//每個loop 200ms(並等待數據傳進buffer)
 =======
     vTaskDelay(500/portTICK_PERIOD_MS);//每個loop 500ms(並等待數據傳進buffer)
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+    vTaskDelay(500/portTICK_PERIOD_MS);//每個loop 500ms(並等待數據傳進buffer)
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
     printf("initial bufferavaliable:%d\n\n",receiveAvaliable());//應是118
 
     char* a = receiveCharArray();//接收char array

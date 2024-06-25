@@ -415,10 +415,14 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
 <<<<<<< HEAD
+<<<<<<< HEAD
   include("C:/Users/Evan/Desktop/communication/build/esp-idf/uratFunction/cmake_install.cmake")
 =======
   include("C:/Users/Evan/Desktop/communication/build/esp-idf/uartFunction/cmake_install.cmake")
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+  include("C:/Users/Evan/Desktop/communication/build/esp-idf/uartFunction/cmake_install.cmake")
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)

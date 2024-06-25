@@ -62,8 +62,12 @@ $<TARGET_FILE:__idf_perfmon>
 $<TARGET_FILE:__idf_spiffs>
 $<TARGET_FILE:__idf_wifi_provisioning>
 <<<<<<< HEAD
+<<<<<<< HEAD
 $<TARGET_FILE:__idf_uratFunction>
 =======
 $<TARGET_FILE:__idf_uartFunction>
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+$<TARGET_FILE:__idf_uartFunction>
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
 $<TARGET_FILE:__idf_main>

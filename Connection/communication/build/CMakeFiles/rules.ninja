@@ -1400,10 +1400,14 @@ rule C_STATIC_LIBRARY_LINKER____idf_wifi_provisioning_
 # Rule for compiling C files.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 rule C_COMPILER____idf_uratFunction_
 =======
 rule C_COMPILER____idf_uartFunction_
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+rule C_COMPILER____idf_uartFunction_
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
   depfile = $DEP_FILE
   deps = gcc
   command = C:\Users\Evan\.espressif\tools\xtensa-esp-elf\esp-13.2.0_20230928\xtensa-esp-elf\bin\xtensa-esp32-elf-gcc.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
@@ -1414,10 +1418,14 @@ rule C_COMPILER____idf_uartFunction_
 # Rule for linking C static library.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 rule C_STATIC_LIBRARY_LINKER____idf_uratFunction_
 =======
 rule C_STATIC_LIBRARY_LINKER____idf_uartFunction_
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+rule C_STATIC_LIBRARY_LINKER____idf_uartFunction_
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
   command = cmd.exe /C "$PRE_LINK && C:\Users\Evan\.espressif\tools\cmake\3.24.0\bin\cmake.exe -E rm -f $TARGET_FILE && C:\Users\Evan\.espressif\tools\xtensa-esp-elf\esp-13.2.0_20230928\xtensa-esp-elf\bin\xtensa-esp32-elf-ar.exe qc $TARGET_FILE $LINK_FLAGS $in && C:\Users\Evan\.espressif\tools\xtensa-esp-elf\esp-13.2.0_20230928\xtensa-esp-elf\bin\xtensa-esp32-elf-ranlib.exe $TARGET_FILE && $POST_BUILD"
   description = Linking C static library $TARGET_FILE
   restat = $RESTAT

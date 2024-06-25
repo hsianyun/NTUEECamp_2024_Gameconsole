@@ -1,5 +1,6 @@
 # ninja log v5
 <<<<<<< HEAD
+<<<<<<< HEAD
 41	86	7405912963651792	project_elf_src_esp32.c	5f292363b5ebda1a
 10325	10595	7405913068462194	esp-idf/soc/CMakeFiles/__idf_soc.dir/esp32/i2c_periph.c.obj	b9f02d0d606701db
 1886	2455	7405912985583790	esp-idf/mbedtls/mbedtls/library/CMakeFiles/mbedcrypto.dir/platform_util.c.obj	45c9c1453d974296
@@ -1018,6 +1019,8 @@
 13843	14008	0	esp-idf/esptool_py/CMakeFiles/app_check_size	5f307778e8055d49
 13843	14008	0	C:/Users/Evan/Desktop/communication/build/esp-idf/esptool_py/CMakeFiles/app_check_size	5f307778e8055d49
 =======
+=======
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
 46	96	7410235434009241	project_elf_src_esp32.c	5f292363b5ebda1a
 46	96	7410235434009241	C:/Users/Evan/Desktop/communication/build/project_elf_src_esp32.c	5f292363b5ebda1a
 76	159	7410235434651997	esp-idf/esp_system/ld/memory.ld	37a7c3014242512a
@@ -2075,4 +2078,7 @@
 65	261	7410235781111545	C:/Users/Evan/Desktop/communication/build/bootloader/bootloader.elf	cf9f48d634a23db6
 65	261	7410235781111545	C:/Users/Evan/Desktop/communication/build/bootloader/bootloader.bin	cf9f48d634a23db6
 65	261	7410235781111545	C:/Users/Evan/Desktop/communication/build/bootloader/bootloader.map	cf9f48d634a23db6
+<<<<<<< HEAD
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a

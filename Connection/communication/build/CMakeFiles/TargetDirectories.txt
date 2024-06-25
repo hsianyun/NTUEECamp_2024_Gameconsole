@@ -629,6 +629,7 @@ C:/Users/Evan/Desktop/communication/build/esp-idf/wifi_provisioning/CMakeFiles/i
 C:/Users/Evan/Desktop/communication/build/esp-idf/wifi_provisioning/CMakeFiles/install/local.dir
 C:/Users/Evan/Desktop/communication/build/esp-idf/wifi_provisioning/CMakeFiles/install/strip.dir
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:/Users/Evan/Desktop/communication/build/esp-idf/uratFunction/CMakeFiles/__idf_uratFunction.dir
 C:/Users/Evan/Desktop/communication/build/esp-idf/uratFunction/CMakeFiles/edit_cache.dir
 C:/Users/Evan/Desktop/communication/build/esp-idf/uratFunction/CMakeFiles/rebuild_cache.dir
@@ -637,6 +638,8 @@ C:/Users/Evan/Desktop/communication/build/esp-idf/uratFunction/CMakeFiles/instal
 C:/Users/Evan/Desktop/communication/build/esp-idf/uratFunction/CMakeFiles/install/local.dir
 C:/Users/Evan/Desktop/communication/build/esp-idf/uratFunction/CMakeFiles/install/strip.dir
 =======
+=======
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
 C:/Users/Evan/Desktop/communication/build/esp-idf/uartFunction/CMakeFiles/__idf_uartFunction.dir
 C:/Users/Evan/Desktop/communication/build/esp-idf/uartFunction/CMakeFiles/edit_cache.dir
 C:/Users/Evan/Desktop/communication/build/esp-idf/uartFunction/CMakeFiles/rebuild_cache.dir
@@ -644,7 +647,10 @@ C:/Users/Evan/Desktop/communication/build/esp-idf/uartFunction/CMakeFiles/list_i
 C:/Users/Evan/Desktop/communication/build/esp-idf/uartFunction/CMakeFiles/install.dir
 C:/Users/Evan/Desktop/communication/build/esp-idf/uartFunction/CMakeFiles/install/local.dir
 C:/Users/Evan/Desktop/communication/build/esp-idf/uartFunction/CMakeFiles/install/strip.dir
+<<<<<<< HEAD
 >>>>>>> 8f548d9 (modify main.c & readme & urat->uart)
+=======
+>>>>>>> 8f548d9e2f897cc93accbd454370bf141499391a
 C:/Users/Evan/Desktop/communication/build/esp-idf/main/CMakeFiles/__idf_main.dir
 C:/Users/Evan/Desktop/communication/build/esp-idf/main/CMakeFiles/edit_cache.dir
 C:/Users/Evan/Desktop/communication/build/esp-idf/main/CMakeFiles/rebuild_cache.dir
