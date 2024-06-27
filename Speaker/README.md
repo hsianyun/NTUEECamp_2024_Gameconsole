@@ -10,7 +10,7 @@ mp3 音檔撥放流程：
 使用前須先載好 ESP-ADF 擴充，為專門為 audio 所開發的 framwork ， 以下會有說明  
 預計包含音檔上傳、播放暫停、重新播放、音量控制等 function  
 
-完成 ```ESP-ADF 環境設置``` 以及 ```Menuconfig 設置``` 便可開發 audio 相關 
+完成 ```ESP-ADF 環境設置``` 、 ```I2S 初始設置``` 以及 ```Spiffs 設置``` 便可開發 audio 相關 
 
 ### 目前進度
 
