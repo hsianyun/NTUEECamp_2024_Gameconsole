@@ -20,7 +20,8 @@ mp3 音檔撥放流程：
 - [ ] Play / Pause / Stop
 - [ ] Volume Control
 
-### ESP-ADF 環境設置
+<details>
+    <summary><h3>ESP-ADF 環境設置</h3></summary>
 
 #### 方法一（可能失敗）
 
@@ -43,8 +44,12 @@ mp3 音檔撥放流程：
 4. Paste the path of the ```esp-adf``` that you clone at the first step.
 
 5. You can open the example project of ESP-ADF now.
+</details>
 
-### Menuconfig 設置 
+<details>
+    <summary><h3>I2S 初始腳位設置</h3></summary>
+
+目的：更改初始 I2S 腳位設定
 
 1. 將 ```pipeline_spiffs_mp3/components/my_board``` 中的 ```my_board``` 放進自己專案中的 ```components``` 作為客製化的開發板（應不影響原本的開發）。
 
@@ -78,3 +83,31 @@ mp3 音檔撥放流程：
         return ESP_OK;
     }
     ```
+</details>
+
+<details>
+    <summary><h3>Spiffs 設置</h3></summary>
+
+目的：將音檔存進 flash 內
+
+1. 新增 ```partitions.csv``` ，填入以下：
+
+    ```csv
+    # Name,   Type, SubType, Offset,  Size, Flags
+    # Note: if you change the phy_init or app partition offset, make sure to change the offset in Kconfig.projbuild
+    nvs,      data, nvs,     ,        0x6000,
+    phy_init, data, phy,     ,        0x1000,
+    factory,  app,  factory, ,        1M,
+    storage,  data, spiffs,  0x110000,1M, 
+    ```
+    其中 ```storage``` 為我們額外分割出的空間提供音檔進行儲存
+
+2. 在工作區新增名為 ```tools``` 的資料夾，將所需音檔放入
+
+3. 在 ```/main/CMakeLists.txt``` 中加入這行： ```spiffs_create_partition_image(storage ../tools FLASH_IN_PROJECT)```
+
+4. 開啟 ```SDK Configuration Editor (menuconfig)```，搜尋 ```Partition table```，確認已被設定為以下的狀態：
+
+    ![Menuconfig 設置](image/spiffs_setting.png)
+</details>
+
