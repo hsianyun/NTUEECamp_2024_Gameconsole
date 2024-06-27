@@ -567,3 +567,8 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   include("C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_board/cmake_install.cmake")
 endif()
 
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_component/cmake_install.cmake")
+endif()
+

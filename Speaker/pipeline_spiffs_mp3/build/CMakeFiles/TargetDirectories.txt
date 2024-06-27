@@ -845,3 +845,10 @@ C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline
 C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_board/CMakeFiles/install.dir
 C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_board/CMakeFiles/install/local.dir
 C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_board/CMakeFiles/install/strip.dir
+C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_component/CMakeFiles/__idf_my_component.dir
+C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_component/CMakeFiles/edit_cache.dir
+C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_component/CMakeFiles/rebuild_cache.dir
+C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_component/CMakeFiles/list_install_components.dir
+C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_component/CMakeFiles/install.dir
+C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_component/CMakeFiles/install/local.dir
+C:/Users/AJChen2005/Documents/GitHub/NTUEECamp_2024_Gameconsole/Speaker/pipeline_spiffs_mp3/build/esp-idf/my_component/CMakeFiles/install/strip.dir
