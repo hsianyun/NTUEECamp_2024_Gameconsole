@@ -10,18 +10,43 @@ mp3 音檔撥放流程：
 使用前須先載好 ESP-ADF 擴充，為專門為 audio 所開發的 framwork ， 以下會有說明  
 預計包含音檔上傳、播放暫停、重新播放、音量控制等 function  
 
-完成 ```ESP-ADF 環境設置``` 、 ```I2S 初始設置``` 以及 ```Spiffs 設置``` 便可開發 audio 相關 
+完成 ```ESP-ADF 環境設置``` 、 ```I2S 初始腳位設置``` 以及 ```Spiffs 設置``` 便可開發 audio 相關 
 
-### 目前進度
+### 文件結構
 
-- [ ] Download ESP-ADF
-- [ ] README 
-- [ ] File Upload
-- [ ] Play / Pause / Stop
-- [ ] Volume Control
+```
+Speaker/
+├── pipeline_spiffs_mp3/
+│   ├── main/
+│   │   ├── play_spiffs_mp3_example.c
+│   │   └── CMakeLists.txt
+│   ├── components/
+│   │   ├── my_board/
+│   │   │   ├── my_board_v1_0/
+│   │   │   │   ├── board_def.h
+│   │   │   │   ├── board_pins_config.c
+│   │   │   │   ├── board.c
+│   │   │   │   └── board.h
+│   │   │   ├── my_codec_driver/
+│   │   │   │   ├── new_codec.c
+│   │   │   │   └── new_codec.h
+│   │   │   └── CMakeLists.txt
+│   │   ├── my_component/
+│   │   │   ├── include/
+│   │   │   │   └── my_component.h
+│   │   │   ├── src/
+│   │   │   │   └── my_component.c
+│   │   │   └── CMakeLists.txt
+│   └── partitions.csv
+└── tools/
+
+```
 
 <details>
-    <summary><h3>ESP-ADF 環境設置</h3></summary>
+    <summary><h3>環境設置</h3></summary>
+
+<details>
+    <summary><h4>ESP-ADF 環境設置</h4></summary>
 
 #### 方法一（可能失敗）
 
@@ -47,7 +72,7 @@ mp3 音檔撥放流程：
 </details>
 
 <details>
-    <summary><h3>I2S 初始腳位設置</h3></summary>
+    <summary><h4>I2S 初始腳位設置</h4></summary>
 
 目的：更改初始 I2S 腳位設定
 
@@ -86,7 +111,7 @@ mp3 音檔撥放流程：
 </details>
 
 <details>
-    <summary><h3>Spiffs 設置</h3></summary>
+    <summary><h4>Spiffs 設置</h4></summary>
 
 目的：將音檔存進 flash 內
 
@@ -110,4 +135,49 @@ mp3 音檔撥放流程：
 
     ![Menuconfig 設置](image/spiffs_setting.png)
 </details>
+
+</details>
+
+<details>
+    <summary><h3>sample 與相關 function</h3></summary>
+
+#### 文件結構
+
+```
+Speaker/
+├── pipeline_spiffs_mp3/
+│   ├── main/
+│   │   ├── play_spiffs_mp3_example.c
+│   │   └── CMakeLists.txt
+│   ├── components/
+│   │   ├── my_board/
+│   │   │   ├── my_board_v1_0/
+│   │   │   │   ├── board_def.h
+│   │   │   │   ├── board_pins_config.c
+│   │   │   │   ├── board.c
+│   │   │   │   └── board.h
+│   │   │   ├── my_codec_driver/
+│   │   │   │   ├── new_codec.c
+│   │   │   │   └── new_codec.h
+│   │   │   └── CMakeLists.txt
+│   │   ├── my_component/
+│   │   │   ├── include/
+│   │   │   │   └── my_component.h
+│   │   │   ├── src/
+│   │   │   │   └── my_component.c
+│   │   │   └── CMakeLists.txt
+│   └── partitions.csv
+└── tools/
+
+```
+
+<details>
+    <summary><h4>functions（位於 my_component 內）</h4></summary>
+
+在 ```my_component/CMakeListLists.txt``` 中要加入 ```REQUIRES audio_pipeline audio_stream audio_hal esp_peripherals```
+
+1. ```void initialize_audio_system()```
+
+    初始化音頻系統
+    
 
