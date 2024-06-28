@@ -4,8 +4,6 @@
 #include "audio_pipeline.h"
 #include "esp_peripherals.h"
 
-// static const char *TAG = "MY_COMPONENT";
-
 // functions
 // 初始化音頻系統
 void initialize_audio_system();
@@ -26,14 +24,20 @@ void handle_audio_events();
 // 打斷現在音樂進行並重複播放
 void replay_audio();
 
-// 暫停
+// 設定目前音樂可循環播放
+void set_audio_loop(bool is_loop);
+
+// 暫停播放
 void pause_audio();
 
 // 恢復播放
 void resume_audio();
 
-// 停止播放並銷毀現有進程
+// 停止播放
 void stop_audio();
+
+// 停止播放並銷毀釋出
+void terminate_audio();
 
 // 設置音量大小
 // volume 範圍有待商榷

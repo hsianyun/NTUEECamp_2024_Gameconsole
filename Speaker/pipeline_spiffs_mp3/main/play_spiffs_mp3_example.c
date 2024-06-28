@@ -19,18 +19,24 @@
 #include "my_component.h"
 
 void app_main(void) {
+    // 初始化音頻系統
     initialize_audio_system();
 
+    // 設置播放文件
     set_mp3("/spiffs/adf_music.mp3");
     start_mp3();
-
     play_mp3();
     
     while (1) {
+        // 控制音量
         set_volume(-15);
+        // 使之重複播放
+        set_audio_loop(true);
+        // 監測播放狀態
         handle_audio_events();
     }
 
-    stop_audio();
+    // 停止並銷毀
+    terminate_audio();
 }
 
