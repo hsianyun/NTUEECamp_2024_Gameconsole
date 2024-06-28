@@ -1,2 +1,2 @@
 ## 連線組
-readme is in folder "communication"
+readme is in folder "Connection/connection"
