@@ -13,6 +13,14 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
+// 設置兩個 audio_pipeline 實現循環播放、確保不同音訊間連接順暢
+#define AUDIO_INDEX_ITERATE(index) for (int index = 0; index < AUDIO_NUM; index++)
+typedef enum {
+    AUDIO_FIRST = 0,
+    AUDIO_SECOND,
+    AUDIO_NUM
+} audio_index_t;
+
 // audio_pipeline_handler 將個別處理部分整合
 static audio_pipeline_handle_t play_pipeline[AUDIO_NUM];
 
@@ -38,15 +46,9 @@ static audio_event_iface_msg_t msg;
 // 設置緩衝區大小
 #define RINGBUF_INPUT_SIZE (6 * 1024)
 
-// 設置兩個 audio_pipeline 實現循環播放、確保不同音訊間連接順暢
-#define AUDIO_INDEX_ITERATE(index) for (int index = 0; index < AUDIO_NUM; index++)
-typedef enum {
-    AUDIO_FIRST = 0,
-    AUDIO_SECOND,
-    AUDIO_NUM
-} audio_index_t;
-
 int cur_index = 0;
+
+bool music_playback_loop = false;
 
 // initialize_audio_system
 void initialize_audio_system() {
@@ -115,16 +117,13 @@ void initialize_audio_system() {
 
 // 設置 mp3 文件，選擇音檔
 void set_mp3(const char *file_path) {
-    AUDIO_INDEX_ITERATE(audio_index) {
-    audio_pipeline_stop(play_pipeline[audio_index]);
-    audio_pipeline_wait_for_stop(play_pipeline[audio_index]);
-    audio_pipeline_reset_ringbuffer(play_pipeline[audio_index]);
-    audio_pipeline_reset_elements(play_pipeline[audio_index]);
-    audio_pipeline_reset_items_state(play_pipeline[audio_index]);
-    audio_element_set_uri(spiffs_stream_reader[audio_index], file_path);
-    audio_element_set_output_ringbuf(audio_decoder[audio_index], ringbuf);
+    if(msg.source == NULL) {
+        audio_element_set_uri(spiffs_stream_reader[cur_index], file_path);
+        audio_element_set_output_ringbuf(audio_decoder[cur_index], ringbuf);
+        audio_element_set_input_ringbuf(i2s_stream_writer, ringbuf);
+        return;
     }
-    audio_element_set_input_ringbuf(i2s_stream_writer, ringbuf);
+    audio_element_set_uri(spiffs_stream_reader[cur_index], file_path);
 }
 
 // 啟動 mp3 播放功能
@@ -135,7 +134,19 @@ void start_mp3() {
 
 // 播放 mp3
 void play_mp3() {
-    audio_pipeline_run(play_pipeline[cur_index]);
+    if(msg.source == NULL) {
+        audio_pipeline_run(play_pipeline[cur_index]);
+        return;
+    }
+    if(msg.source_type == AUDIO_ELEMENT_TYPE_ELEMENT && msg.cmd == AEL_MSG_CMD_REPORT_STATUS &&
+        (((int)msg.data == AEL_STATUS_STATE_FINISHED) || ((int)msg.data == AEL_STATUS_STATE_STOPPED)))
+        {
+            audio_pipeline_reset_ringbuffer(play_pipeline[cur_index]);
+            audio_pipeline_reset_elements(play_pipeline[cur_index]);
+            audio_pipeline_change_state(play_pipeline[cur_index], AEL_STATE_INIT);
+            audio_pipeline_run(play_pipeline[cur_index]);
+        }
+
 }
 
 // 處理音訊播放
@@ -151,7 +162,7 @@ void handle_audio_events()
         audio_element_info_t music_info = {0};
         static audio_element_info_t prev_music_info = {0};
         AUDIO_INDEX_ITERATE(audio_index) {
-            if (msg.source != (void *) audio_decoder[audio_index]) {
+            if (msg.source == (void *) audio_decoder[audio_index]) {
                 continue;
             }
             audio_element_getinfo(audio_decoder[audio_index], &music_info);
@@ -166,10 +177,19 @@ void handle_audio_events()
         return;
     }
 
+    // 當播放結束時，處理下一步
     if (msg.source_type == AUDIO_ELEMENT_TYPE_ELEMENT && msg.cmd == AEL_MSG_CMD_REPORT_STATUS &&
         ((int)msg.data == AEL_STATUS_STATE_FINISHED)) {
-        replay_audio();
+            if(music_playback_loop == true) {
+                replay_audio();
+            }
+            else stop_audio();
     }
+}
+
+// 設定重複播放與否
+void set_audio_loop(bool is_loop) {
+    music_playback_loop = is_loop;
 }
 
 // 重新播放音檔
@@ -182,16 +202,21 @@ void replay_audio() {
             } else {
                 next_index++;
             }
+            // 播下一個 pipeline 
             rb_reset_is_done_write(ringbuf);
+            audio_element_set_uri(spiffs_stream_reader[next_index], audio_element_get_uri(spiffs_stream_reader[audio_index]));
             audio_element_set_output_ringbuf(audio_decoder[audio_index], NULL);
             audio_element_set_output_ringbuf(audio_decoder[next_index], ringbuf);
             audio_pipeline_run(play_pipeline[next_index]);
 
+            // 重啟下個 pipeline
             audio_pipeline_stop(play_pipeline[audio_index]);
             audio_pipeline_wait_for_stop(play_pipeline[audio_index]);
             audio_pipeline_reset_ringbuffer(play_pipeline[audio_index]);
             audio_pipeline_reset_elements(play_pipeline[audio_index]);
             audio_pipeline_reset_items_state(play_pipeline[audio_index]);
+
+            cur_index = next_index;
             break;
         }
     }
@@ -213,8 +238,16 @@ void resume_audio() {
     audio_element_resume(i2s_stream_writer, 0, portMAX_DELAY);
 }
 
-// 停止播放並銷毀
+// 停止播放
 void stop_audio() {
+    if(msg.source_type == AUDIO_ELEMENT_TYPE_ELEMENT && msg.cmd == AEL_MSG_CMD_REPORT_STATUS &&
+        (((int)msg.data == AEL_STATUS_STATE_FINISHED) || ((int)msg.data != AEL_STATUS_STATE_STOPPED)))
+    audio_pipeline_stop(play_pipeline[cur_index]);
+    audio_pipeline_wait_for_stop(play_pipeline[cur_index]);
+}
+
+// 停止播放並銷毀
+void terminate_audio() {
     AUDIO_INDEX_ITERATE(audio_index) {
         audio_pipeline_stop(play_pipeline[audio_index]);
         audio_pipeline_wait_for_stop(play_pipeline[audio_index]);
@@ -222,10 +255,16 @@ void stop_audio() {
         audio_pipeline_unregister(play_pipeline[audio_index], spiffs_stream_reader[audio_index]);
         audio_pipeline_unregister(play_pipeline[audio_index], audio_decoder[audio_index]);
         audio_pipeline_remove_listener(play_pipeline[audio_index]);
+        audio_pipeline_deinit(play_pipeline[audio_index]);
+        audio_element_deinit(audio_decoder[audio_index]);
+        audio_element_deinit(spiffs_stream_reader[audio_index]);
     }
+    esp_periph_set_stop_all(set);
+    audio_event_iface_remove_listener(esp_periph_set_get_event_iface(set), evt);
     audio_element_deinit(i2s_stream_writer);
     audio_event_iface_destroy(evt);
     rb_destroy(ringbuf);
+    esp_periph_set_destroy(set);
 }
 
 // 設置音量大小

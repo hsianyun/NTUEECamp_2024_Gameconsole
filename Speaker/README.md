@@ -178,6 +178,40 @@ Speaker/
 
 1. ```void initialize_audio_system()```
 
-    初始化音頻系統
+    初始化音頻系統，使用相關 function 需先初始化
+
+2. ```void set_mp3(const char *file_path)```
+
+    設置播放檔案（通常為 ```"/spiffs/..."```）
+
+3. ```void start_mp3()``` 
+
+    啟動播放系統（實際為啟動 spiff_stream）
+
+4. ```void play_mp3()```
+
+    播放音頻
+
+5. ```void handle_audio_events()```
+
+    監聽播放狀態
+
+6. ```void set_audio_loop(bool is_loop)```
+
+    設定是否循環播放，是的話輸入 true
+
+7. ```void pause_audio()```
+
+    暫停播放
+
+8. ```void resume_audio()```
+
+    恢復播放
+
+<details>
+    <summary><h4>sample（位於 my_component 內）</h4></summary>
+
+    目前依照此 sample 可實作循環播放，但切換音樂尚未完善
+
     
 
