@@ -11,7 +11,7 @@
 | DC | 2(數據選擇) |
 | CS | 5(數據選擇) |
 ****  
-#### ST7789函式(使用https://github.com/nopnop2002/esp-idf-st7789/tree/master)：
+#### ST7789函式(使用https://github.com/nopnop2002/esp-idf-st7789)：
 ###### 須宣告型別為TFT_t的變數當參數給函式，內含SPI腳位及螢幕相關資訊
 | Function | Description |
 |---|---|
@@ -71,11 +71,23 @@ esp_vfs_spiffs_conf_t conf = {
 esp_err_t ret = esp_vfs_spiffs_register(&conf);
 ```
 ###### 在app_main(void)裡面加入以下程式碼顯示圖片(需要include <string.h>、"st7789.h"、"decode_png.h"、"pngle.h")，image為圖檔名稱
+```
 char file[32];
 strcpy(file, "/spiffs/image.png");
-lcdShowPND(&TFT_t,file,CONFIG_WIDTH, CONFIG_HEIGHT);
+lcdShowPNG(&TFT_t,0,0,file,CONFIG_WIDTH, CONFIG_HEIGHT);
+```
+###### lcdShowPNG用法如下
+| Function | Description |
+|---|---|
+| lcdShowPNG(&TFT_t,uint16_t x,uint16_t y,file,int width,int height); | 顯示圖片(需指定起始位置、檔案路徑及圖片大小) |
 ###### 測試結果(圖片尺吋需為240*320 pixels)
 ![](image/display_image.jpg)
+###### 可使用以下函式增加fps，實測最高可將速度調整為60M
+| Function | Description |
+|---|---|
+| void spi_clock_speed(int speed); | 設定SPI時脈速度(需指定速度) |     
+
+[點我看測試結果影片](https://youtu.be/QXjT5e9RQVA?si=XQvgk_8ioQZ9uBVW)
 ****
 #### 顯示文字的方法(需要include "fontx.h")
 ###### 相關函式如下
