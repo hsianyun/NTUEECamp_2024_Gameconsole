@@ -46,7 +46,7 @@ void loop() {
 
     clearBuffer();
     printf("bufferavaliable after clearBuffer:%d\n\n\n\n",receiveAvaliable());//應是0
-
+    free(a);
 }
 void app_main() {
     setup();
