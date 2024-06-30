@@ -50,7 +50,7 @@ char* receiveCharArray() {
             str[index++] = a;
             if (a == '\0' || index >= BUF_SIZE)break;
         } else {
-            //free(str);
+            free(str);
             return NULL;//超過timeout
         }
     }
