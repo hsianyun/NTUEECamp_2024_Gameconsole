@@ -1093,12 +1093,16 @@ void lcdDrawFinish(TFT_t *dev)
 	return;
 }
 
-TickType_t lcdShowPNG(TFT_t * dev, char * file, int width, int height) {
+TickType_t lcdShowPNG(TFT_t * dev, uint16_t x, uint16_t y, char * file, int width, int height) {
+	uint16_t x0 = dev->_offsetx;
+	uint16_t y0 = dev->_offsety;
+	dev->_offsetx = x;
+	dev->_offsety = y;
+	
 	TickType_t startTick, endTick, diffTick;
 	startTick = xTaskGetTickCount();
 
 	lcdSetFontDirection(dev, 0);
-	lcdFillScreen(dev, BLACK);
 
 	// open PNG file
 	FILE* fp = fopen(file, "rb");
@@ -1169,7 +1173,6 @@ TickType_t lcdShowPNG(TFT_t * dev, char * file, int width, int height) {
 			colors[x] = pngle->pixels[y][x];
 		}
 		lcdDrawMultiPixels(dev, _cols, y+_rows, _width, colors);
-		vTaskDelay(1);
 	}
 	lcdDrawFinish(dev);
 	free(colors);
@@ -1178,5 +1181,8 @@ TickType_t lcdShowPNG(TFT_t * dev, char * file, int width, int height) {
 	endTick = xTaskGetTickCount();
 	diffTick = endTick - startTick;
 	ESP_LOGI(__FUNCTION__, "elapsed time[ms]:%"PRIu32,diffTick*portTICK_PERIOD_MS);
+	
+	dev->_offsetx = x0;
+	dev->_offsety = y0;
 	return diffTick;
 }

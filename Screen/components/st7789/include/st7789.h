@@ -89,6 +89,6 @@ void lcdInversionOff(TFT_t * dev);
 void lcdInversionOn(TFT_t * dev);
 void lcdWrapArround(TFT_t * dev, SCROLL_TYPE_t scroll, int start, int end);
 void lcdDrawFinish(TFT_t *dev);
-TickType_t lcdShowPNG(TFT_t * dev, char * file, int width, int height);
+TickType_t lcdShowPNG(TFT_t * dev, uint16_t x, uint16_t y, char * file, int width, int height);
 #endif /* MAIN_ST7789_H_ */
 
