@@ -30,19 +30,19 @@ void loop() {
     sendChar(ch);
 
     vTaskDelay(500/portTICK_PERIOD_MS);//每個loop 500ms(並等待數據傳進buffer)
-    printf("initial bufferavaliable:%d\n\n",receiveAvaliable());//應是118
+    printf("initial bufferavaliable:%d\n\n",receiveAvaliable());//應是80
 
     a = receiveCharArray();//接收char array
     printf("Received array: %s\n", a ? a : "NULL");
-    printf("bufferavaliable after receive charArray:%d\n\n",receiveAvaliable());//應是61
+    printf("bufferavaliable after receive charArray:%d\n\n",receiveAvaliable());//應是42
 
     num = receiveUint8();//接收uint8
     printf("Received num: %u\n", num);
-    printf("bufferavaliable after receive charArray uint8:%d\n\n",receiveAvaliable());//應是60
+    printf("bufferavaliable after receive charArray uint8:%d\n\n",receiveAvaliable());//應是41
 
     received_ch = receiveChar();//接收char
     printf("Received char: %c\n", received_ch);
-    printf("bufferavaliable after receive charArray uint8 char:%d\n\n",receiveAvaliable());//應是59
+    printf("bufferavaliable after receive charArray uint8 char:%d\n\n",receiveAvaliable());//應是40
 
     clearBuffer();
     printf("bufferavaliable after clearBuffer:%d\n\n\n\n",receiveAvaliable());//應是0
