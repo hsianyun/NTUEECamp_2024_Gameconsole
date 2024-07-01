@@ -40,7 +40,25 @@
 ###### 6.[點我看測試結果影片](https://youtu.be/HgKVLeBPlRc)
 ![](image/espidf_test_result.jpg)
 ****
-#### 顯示自定義圖片的方法
+#### 顯示自定義圖片的方法(需要事先decode)
+###### 1.[下載LCD Image Converter](https://lcd-image-converter.riuson.com/en/about/)
+###### 2.打開應用程式後選擇open打開圖片
+![](image/lcd_converter_1.png)
+###### 3.選擇options的conversions
+![](image/lcd_converter_2.png)
+###### 4.更改以下設定(選擇Color R5G6B5、UTF-8)
+![](image/lcd_converter_3.png)
+![](image/lcd_converter_4.png)
+###### 5.選擇options的converter並指定檔案位置
+![](image/lcd_converter_5.png)
+###### 6.複製陣列的內容後使用以下函式
+| Function | Description |
+|---|---|
+| lcdDrawPNG(&TFT_t,uint16_t x,uint16_t y,const uint16_t * PNG,int width,int height); | 顯示圖片(需指定起始位置、decode後的陣列名稱及圖片大小) |
+
+[測試用project壓縮檔雲端連結，直接燒錄即可用，用事先decode的方法循環顯示圖片](https://drive.google.com/file/d/1Geh1kC2npjiGMlWulao-uL2aKiO1J3gw/view?usp=drive_link)
+****    
+#### 顯示自定義圖片的方法(沒有事先decode)
 [Partition Tables參考資料](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/partition-tables.html)
 [SPIFFS Filesystem參考資料](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/storage/spiffs.html)
 ###### ESP32 flash memory structure如下圖，存在此區域的資料在關機的時候不會被清空
