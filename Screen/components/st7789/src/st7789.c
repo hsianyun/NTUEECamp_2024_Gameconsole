@@ -1186,3 +1186,30 @@ TickType_t lcdShowPNG(TFT_t * dev, uint16_t x, uint16_t y, char * file, int widt
 	dev->_offsety = y0;
 	return diffTick;
 }
+
+void lcdDrawPNG(TFT_t *dev, uint16_t x, uint16_t y, const uint16_t * PNG, int width, int height){
+	uint16_t x0 = dev->_offsetx;
+	uint16_t y0 = dev->_offsety;
+	dev->_offsetx = x;
+	dev->_offsety = y;
+
+	uint16_t _width = width;
+	uint16_t _cols = 0;
+
+	uint16_t _height = height;
+	uint16_t _rows = 0;
+
+	uint16_t *colors = (uint16_t*)malloc(sizeof(uint16_t) * _width);
+
+	for(int y = 0; y < _height; y++){
+		for(int x = 0;x < _width; x++){;
+			colors[x] = PNG[x+y*_width];
+		}
+		lcdDrawMultiPixels(dev, _cols, y+_rows, _width, colors);
+	}
+	free(colors);
+
+	dev->_offsetx = x0;
+	dev->_offsety = y0;
+	return;
+}
