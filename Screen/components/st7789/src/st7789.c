@@ -396,6 +396,7 @@ void lcdDisplayOn(TFT_t * dev) {
 // color:color
 void lcdFillScreen(TFT_t * dev, uint16_t color) {
 	lcdDrawFillRect(dev, 0, 0, dev->_width-1, dev->_height-1, color);
+	lcdDrawFinish(dev);
 }
 
 // Draw line
@@ -1093,22 +1094,17 @@ void lcdDrawFinish(TFT_t *dev)
 	return;
 }
 
-TickType_t lcdShowPNG(TFT_t * dev, uint16_t x, uint16_t y, char * file, int width, int height) {
+void lcdShowPNG(TFT_t * dev, uint16_t x, uint16_t y, char * file, int width, int height) {
 	uint16_t x0 = dev->_offsetx;
 	uint16_t y0 = dev->_offsety;
 	dev->_offsetx = x;
 	dev->_offsety = y;
-	
-	TickType_t startTick, endTick, diffTick;
-	startTick = xTaskGetTickCount();
-
-	lcdSetFontDirection(dev, 0);
 
 	// open PNG file
 	FILE* fp = fopen(file, "rb");
 	if (fp == NULL) {
 		ESP_LOGW(__FUNCTION__, "File not found [%s]", file);
-		return 0;
+		return;
 	}
 
 	char buf[1024];
@@ -1177,39 +1173,29 @@ TickType_t lcdShowPNG(TFT_t * dev, uint16_t x, uint16_t y, char * file, int widt
 	lcdDrawFinish(dev);
 	free(colors);
 	pngle_destroy(pngle, width, height);
-
-	endTick = xTaskGetTickCount();
-	diffTick = endTick - startTick;
-	ESP_LOGI(__FUNCTION__, "elapsed time[ms]:%"PRIu32,diffTick*portTICK_PERIOD_MS);
 	
 	dev->_offsetx = x0;
 	dev->_offsety = y0;
-	return diffTick;
+	return;
 }
 
-void lcdDrawPNG(TFT_t *dev, uint16_t x, uint16_t y, const uint16_t * PNG, int width, int height){
-	uint16_t x0 = dev->_offsetx;
-	uint16_t y0 = dev->_offsety;
-	dev->_offsetx = x;
-	dev->_offsety = y;
-
+void lcdDrawPNG(TFT_t *dev, uint16_t x, uint16_t y, const uint16_t * PNG, int width, int height)
+{
 	uint16_t _width = width;
-	uint16_t _cols = 0;
+	uint16_t _cols = y;
 
 	uint16_t _height = height;
-	uint16_t _rows = 0;
+	uint16_t _rows = 320-x-width;
 
 	uint16_t *colors = (uint16_t*)malloc(sizeof(uint16_t) * _width);
 
-	for(int y = 0; y < _height; y++){
-		for(int x = 0;x < _width; x++){;
-			colors[x] = PNG[x+y*_width];
+	for(int y = 0; y < _width; y++){
+		for(int x = 0;x < _height; x++){;
+			colors[x] = PNG[_width-1+x*_width-y];
 		}
-		lcdDrawMultiPixels(dev, _cols, y+_rows, _width, colors);
+		lcdDrawMultiPixels(dev, _cols, y+_rows, _height, colors);
 	}
+	lcdDrawFinish(dev);
 	free(colors);
-
-	dev->_offsetx = x0;
-	dev->_offsety = y0;
 	return;
 }
