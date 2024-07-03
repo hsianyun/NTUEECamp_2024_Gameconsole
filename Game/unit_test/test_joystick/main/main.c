@@ -12,7 +12,9 @@
 2. use adc_oneshot to get the value 
 3. correct the value of center when init (should calculate the average value)
 4. x, y value getter in int16_t(signed) which is the corrected value
-5. the value of the angle in degree or radius (0~360 or 0~2pi)(type: float)
+5. the getter of button's state
+6. the button is pressed or released respectively
+7. the value of the angle in degree or radius (0~360 or 0~2pi)(type: float)
 Thx
 */
 
