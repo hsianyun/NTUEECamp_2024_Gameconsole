@@ -25,6 +25,7 @@
 | lcdDrawTriangle(&TFT_t,uint16_t xc,uint16_t yc,uint16_t w,uint16_t h,uint16_t angle,uint16_t color); | 畫三角形(需指定座標、角度及顏色) | 
 | lcdDrawCircle(&TFT_t,uint16_t x0,uint16_t y0,uint16_t r,uint16_t color); | 畫空心圓(需指定座標、半徑及顏色) |
 | lcdDrawFillCircle(&TFT_t,uint16_t x0,uint16_t y0,uint16_t r,uint16_t color); | 畫實心圓(需指定座標、半徑及顏色) |
+| lcdDrawFinish(&TFT_t); | 如果有使用FrameBuffer，每次draw完要執行這個function |
 ****
 #### 測試步驟
 ###### 1.在terminal打這串指令進入menuconfig
@@ -40,7 +41,32 @@
 ###### 6.[點我看測試結果影片](https://youtu.be/HgKVLeBPlRc)
 ![](image/espidf_test_result.jpg)
 ****
-#### 顯示自定義圖片的方法
+#### 顯示自定義圖片的方法(需要事先decode)
+###### 1.[下載LCD Image Converter](https://lcd-image-converter.riuson.com/en/about/)
+###### 2.打開應用程式後選擇open打開圖片
+![](image/lcd_converter_1.png)
+###### 3.選擇options的conversions
+![](image/lcd_converter_2.png)
+###### 4.更改以下設定(選擇Color R5G6B5、UTF-8)
+![](image/lcd_converter_3.png)
+![](image/lcd_converter_4.png)
+###### 5.選擇options的converter並指定檔案位置
+![](image/lcd_converter_5.png)
+###### 6.複製陣列的內容後使用以下函式
+| Function | Description |
+|---|---|
+| lcdDrawPNG(&TFT_t,uint16_t x,uint16_t y,const uint16_t * PNG,int width,int height); | 顯示圖片(需指定起始位置、decode後的陣列名稱及圖片大小) |
+
+[測試用project壓縮檔雲端連結，直接燒錄即可用，用事先decode的方法循環顯示圖片](https://drive.google.com/file/d/11XsKPxOF8vMk8RMdW_3g7l8hZdp_O9AQ/view?usp=drive_link)
+****   
+###### 可使用以下函式增加fps，實測最高可將速度調整為60M
+| Function | Description |
+|---|---|
+| void spi_clock_speed(int speed); | 設定SPI時脈速度(需指定速度) |     
+
+[點我看測試結果影片(全圖更新fps最高可達12)](https://youtu.be/sE1zGvkaQYE)
+****     
+#### 顯示自定義圖片的方法(沒有事先decode)
 [Partition Tables參考資料](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/partition-tables.html)
 [SPIFFS Filesystem參考資料](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-reference/storage/spiffs.html)
 ###### ESP32 flash memory structure如下圖，存在此區域的資料在關機的時候不會被清空
@@ -82,12 +108,6 @@ lcdShowPNG(&TFT_t,0,0,file,CONFIG_WIDTH, CONFIG_HEIGHT);
 | lcdShowPNG(&TFT_t,uint16_t x,uint16_t y,file,int width,int height); | 顯示圖片(需指定起始位置、檔案路徑及圖片大小) |
 ###### 測試結果(圖片尺吋需為240*320 pixels)
 ![](image/display_image.jpg)
-###### 可使用以下函式增加fps，實測最高可將速度調整為60M
-| Function | Description |
-|---|---|
-| void spi_clock_speed(int speed); | 設定SPI時脈速度(需指定速度) |     
-
-[點我看測試結果影片](https://youtu.be/QXjT5e9RQVA?si=XQvgk_8ioQZ9uBVW)
 ****
 #### 顯示文字的方法(需要include "fontx.h")
 ###### 相關函式如下
