@@ -12,4 +12,6 @@ void printKeyState(void);
 void printKeyPress(void);
 void printKeyRelease(void);
 
+const bool* getKeyState(void);
+
 #endif
