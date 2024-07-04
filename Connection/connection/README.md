@@ -63,16 +63,16 @@ Usage:
 ## Expected Output
 Upon running the program, you should see the following output:
 
-    initial bufferavaliable:118
+    initial bufferavaliable:80
 
-    Received array:data try  data try data try data try sign try !@#$^ &*()
-    bufferavaliable after receive charArray:61
+    Received array:data try data try sign try !@#$^ &*()
+    bufferavaliable after receive charArray:42
 
     Received num:85
-    bufferavaliable after receive charArray uint8:60
+    bufferavaliable after receive charArray uint8:41
 
     Received char:y
-    bufferavaliable after receive charArray uint8 char:59
+    bufferavaliable after receive charArray uint8 char:40
 
     bufferavaliable after clearBuffer:0
 
