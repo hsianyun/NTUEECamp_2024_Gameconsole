@@ -28,7 +28,7 @@ uint8_t msgType = 0; //預設發送種類為DATA
 uint8_t signalType = 0;
 void uartSetup() {
     uart_config_t uart_config = {
-        .baud_rate = 9600,
+        .baud_rate = 1843200,
         .data_bits = UART_DATA_8_BITS,
         .parity = UART_PARITY_DISABLE,
         .stop_bits = UART_STOP_BITS_1,
