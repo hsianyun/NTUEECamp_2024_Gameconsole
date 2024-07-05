@@ -11,8 +11,6 @@ const uint8_t COLUMN[NUM_OF_COL] = {GPIO_NUM_14, GPIO_NUM_12, GPIO_NUM_13};  // 
 bool mem1[NUM_OF_ROW*NUM_OF_COL] = {0}, mem2[NUM_OF_ROW*NUM_OF_COL] = {0};
 bool *curr_key_state = mem1, *last_key_state = mem2; // Array to store key states in current and last frame. 0 = not pressed, 1 = pressed
 bool keyState[NUM_OF_ROW*NUM_OF_COL] = {0}, keyPress[NUM_OF_ROW*NUM_OF_COL] = {0}, keyRelease[NUM_OF_ROW*NUM_OF_COL] = {0};
-clock_t timeOfChange[NUM_OF_ROW*NUM_OF_COL] = {0}; // Debouncing: array to store latest time of input change
-bool bouncing[NUM_OF_ROW*NUM_OF_COL] = {0}; // Array to store whether key is bouncing
 const uint8_t ULT_CODE[ULT_NUM][ULT_LEN] = {{0, 2, 3, 4, 1},
                                             {1, 1, 4, 4, 2}}; // The codes to trigger ultimate skills
 int ultSkillExecute = -1; // the ultimate skill to be executed
