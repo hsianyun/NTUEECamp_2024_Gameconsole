@@ -2,7 +2,7 @@
 | ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
 # __connection Project__
 
-**This project demonstrates UART communication between two ESP32 devices. It includes functions for sending and receiving 'charArray', 'char', and 'uint8' data types, as well as functions for clearing the buffer, setting a timeout, and checking buffer availability.**
+**This project demonstrates UART communication between two ESP32 devices. It includes functions for sending and receiving 'charArray', 'char', and 'uint8' data types,and functions for control singnal:sendRequest、acceptRequest、sendInit、ackInit、sendSync、ackSync ,as well as functions for clearing the buffer, setting a timeout, and checking buffer availability.**
 **To achieve this, the RX and TX pins of the UART are connected to GPIO16 and GPIO17 respectively.**
 
 ## Installation and Setup  
@@ -63,19 +63,13 @@ Usage:
 ## Expected Output
 Upon running the program, you should see the following output:
 
-    initial bufferavaliable:80
-
-    Received array:data try data try sign try !@#$^ &*()
-    bufferavaliable after receive charArray:42
-
-    Received num:85
-    bufferavaliable after receive charArray uint8:41
-
-    Received char:y
-    bufferavaliable after receive charArray uint8 char:40
-
-    bufferavaliable after clearBuffer:0
-
+    data try data try sign try !@#$^ &*()
+    85
+    y
+    1
+    1
+    1
+    
 This output confirms that the data transmission and reception between the two ESP32 devices are functioning as expected.
 
 

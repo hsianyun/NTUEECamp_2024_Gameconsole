@@ -22,7 +22,7 @@ void setup() {
 }
 
 void loop() {
-    sendCharArray(array);//傳送兩次
+    sendCharArray(array);
     sendUint8(numm);
     sendChar(ch);
     sendRequest() ;
