@@ -5,7 +5,7 @@
 利用 MAX98375 作為 Codec Chip  
 mp3 音檔撥放流程：  
 ```
-[flash] ---> spiffs_stream ---> mp3_decoder ---> i2s_stream ---> [codec_chip]
+[flash] ---> spiffs_stream ---> mp3_decoder ---> i2s_stream ---> [MAX98375] ---> [Speaker]
 ```  
 使用前須先載好 ESP-ADF 擴充，為專門為 audio 所開發的 framwork ， 以下會有說明  
 預計包含音檔上傳、播放暫停、重新播放、音量控制等 function  
