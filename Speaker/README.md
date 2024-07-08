@@ -194,7 +194,7 @@ Speaker/
 
 5. ```int get_audio_state()```
 
-    Get audio state from i2s_stream_writer
+    Get audio state from i2s_stream_writer  
     Usually got : AEL_STATE_INIT, AEL_STATE_RUNNING, AEL_STATE_FINISHED, AEL_STATE_PAUSED, AEL_STATE_STOPPED
 
 7. ```void pause_audio()```
@@ -217,10 +217,14 @@ Speaker/
 
     Set the audio volume, defualt number is 0
 
+</details>
+
 <details>
     <summary><h4>sample（位於 my_component 內）</h4></summary>
 
-    相關 sample 請參照 Speaker-Test (非 Loop-Test)
+    相關 sample 請參照 Speaker_Test (非 Loop_Test)
+
+</details>
 
     
 
