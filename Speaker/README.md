@@ -182,7 +182,8 @@ Speaker/
 
 2. ```void set_audio(const char *file_path)```
 
-    Set audio file（usually is ```"/spiffs/..."```）
+    Set audio file（usually is ```"/spiffs/..."```）  
+    Please stop the audio first if it's still playing
 
 3. ```void play_audio()```
 
