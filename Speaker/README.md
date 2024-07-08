@@ -178,40 +178,49 @@ Speaker/
 
 1. ```void initialize_audio_system()```
 
-    初始化音頻系統，使用相關 function 需先初始化
+    Initialize audio system
 
-2. ```void set_mp3(const char *file_path)```
+2. ```void set_audio(const char *file_path)```
 
-    設置播放檔案（通常為 ```"/spiffs/..."```）
+    Set audio file（usually is ```"/spiffs/..."```）
 
-3. ```void start_mp3()``` 
+3. ```void play_audio()```
 
-    啟動播放系統（實際為啟動 spiff_stream）
+    Play audio
 
-4. ```void play_mp3()```
+4. ```void handle_audio_events()```
 
-    播放音頻
+    Listen to audio status, wait for every 100ms
 
-5. ```void handle_audio_events()```
+5. ```int get_audio_state()```
 
-    監聽播放狀態
-
-6. ```void set_audio_loop(bool is_loop)```
-
-    設定是否循環播放，是的話輸入 true
+    Get audio state from i2s_stream_writer
+    Usually got : AEL_STATE_INIT, AEL_STATE_RUNNING, AEL_STATE_FINISHED, AEL_STATE_PAUSED, AEL_STATE_STOPPED
 
 7. ```void pause_audio()```
 
-    暫停播放
+    Pause the audio
 
 8. ```void resume_audio()```
 
-    恢復播放
+    Resume the audio
+
+9. ```stop_audio()```
+
+    Stop the audio, terminate the pipeline and reset to wait for the next
+
+10. ```terminate_audio()```
+
+    Terminate the whole audio system and destroy it
+
+11. ```set_volume(int volume)```
+
+    Set the audio volume, defualt number is 0
 
 <details>
     <summary><h4>sample（位於 my_component 內）</h4></summary>
 
-    目前依照此 sample 可實作循環播放，但切換音樂尚未完善
+    相關 sample 請參照 Speaker-Test (非 Loop-Test)
 
     
 
