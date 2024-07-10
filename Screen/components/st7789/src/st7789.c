@@ -1195,7 +1195,6 @@ void lcdDrawPNG(TFT_t *dev, uint16_t x, uint16_t y, const uint16_t * PNG, int wi
 		}
 		lcdDrawMultiPixels(dev, _cols, y+_rows, _height, colors);
 	}
-	lcdDrawFinish(dev);
 	free(colors);
 	return;
 }
