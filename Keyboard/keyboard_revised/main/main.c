@@ -18,6 +18,11 @@ void handleKeyboard(void)
         printKeyPress();
         printKeyState();
         printKeyRelease();
-        vTaskDelay(1000 / portTICK_PERIOD_MS);
+        int u = getUltimateSkill();
+        if(u != -1){
+            printf("Ult: %d\n", u);
+            // printf("********************************\n");
+        }
+        vTaskDelay(50 / portTICK_PERIOD_MS);
     }
 }
