@@ -37,7 +37,7 @@ bool receiveInit()
     return true;
 }
 
-bool receiveTimeOUt()
+bool receiveTimeout()
 {
     printf("Receiving timeout from host...\n");
     return true;
@@ -45,16 +45,21 @@ bool receiveTimeOUt()
 
 void clientStart()
 {
-    sendResponse();
-    while(1)    {
-        if(receiveTimeOUt())    {
-            printf("Receiving timeout from host...\n");
-            break;
+    // dummy variable
+    bool response  = true;
+    if (!response) return;
+
+    while(1) {
+        if(receiveTimeout())  {
+            printf("Received timeout from host...\n");
+            return;
         } else {
-            if(receiveInit())   {
+            if(receiveInit()) {
                 printf("Receiving init from host...\n");
                 timerSetup(1, 0);
-                break;
+                // send ack
+                // enter game
+                // timer3start
             }
         }
     }
