@@ -8,10 +8,10 @@
 #include "esp_system.h"
 #include "host_start.c"
 
-char* role = "undefined";
-bool find = false;
+char* role = "";
+
 bool searchRequest() {
-    printf("Searching PVP request...\n");
+    printf("Searching for PVP request...\n");
     return true;
 }
 
@@ -26,20 +26,18 @@ void sendRequest() {
 
 void app_main(void)
 {
-    while(!find)    {
-        find = searchRequest();
-        if(startButtonClicked())    {
-            sendRequest();
-            find = true;
-            role = "host";
+    while(role[0] == '\0')    {
+        if (searchRequest()) {
+            printf("PVP request found!\n");
+            role = "client";
+            clientStart();
+        } else {
+            printf("No PVP request found!\n");
+            if (startButtonClicked()) {
+                sendRequest();
+                role = "host";
+                hostStart();
+            }
         }
-    }
-    if(find)    {
-        printf("PVP request found!\n");
-        role = "client";
-        clientStart();
-    } else {
-        printf("No PVP request found!\n");
-        hostStart();
     }
 }

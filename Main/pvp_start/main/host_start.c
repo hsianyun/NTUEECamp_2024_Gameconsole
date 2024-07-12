@@ -21,7 +21,7 @@ void getResponse(int* response)
     printf("Getting response from client...\n");
 }
 
-void sendTimeOut()
+void sendTimeout()
 {
     printf("Sending timeout to client...\n");
 }
@@ -40,12 +40,13 @@ bool receiveAck()
 void hostStart()
 {
     timerSetup(0, 0);
-    while(1)    {
+    bool start = false;
+
+    while(!start)    {
         timer_get_counter_value(0, 0, &timer_val_1);
         if(timer_val_1 >= 10000)  {
             printf("No response from client during request\n");
-            response = 1;
-            break;
+            return;
         } else {
             getResponse(&response);
             switch (response)   {
@@ -54,22 +55,25 @@ void hostStart()
                     break;
                 case 1:
                     printf("Client declined the request\n");
-                    break;
+                    return;
                 case 2:
                     printf("Client accepted the request\n");
+                    start = true;
                     timer_pause(0, 0);
                     break;
             }
         }
     }
+
     timerSetup(0, 1);
     sendInit();
+
     while(1)    {
         timer_get_counter_value(0, 1, &timer_val_2);
         if(timer_val_2 >= 10000)  {
             printf("No response from client during init\n");
-            sendTimeOut();
-            break;
+            sendTimeout();
+            return;
         } else {
             reveice_ack = receiveAck();
             if(reveice_ack) {
