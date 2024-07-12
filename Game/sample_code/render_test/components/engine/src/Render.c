@@ -1,17 +1,17 @@
 /*
-    ResourceManager.c
+    Render.c
 
-    Functions of RenderManager.h.
+    Functions of Render.h.
 */
 
-#ifndef _RENDERMANAGER_C_
-#define _RENDERMANAGER_C_
+#ifndef _RENDER_C_
+#define _RENDER_C_
 
 #include <string.h>
 #include <stdio.h>
 #include <math.h>
-#include "../include/ResourceManager.h"
-#include "../include/RenderManager.h"
+#include "../include/Resource.h"
+#include "../include/Render.h"
 
 //include library "st7789"
 #include "../../st7789/include/st7789.h"
@@ -155,6 +155,18 @@ void renderObjectRender(RenderObject* obj, RenderManager* renderManager)
 /*
     RenderManager class
 */
+RenderManager* newRenderManager()
+{
+    RenderManager* renderManager = calloc(1, sizeof(RenderManager));
+    renderManagerNew(renderManager);
+    return renderManager;
+}
+
+void deleteRenderManager(RenderManager* obj)
+{
+    if(obj != NULL) free(obj);
+}
+
 void renderManagerNew(RenderManager* obj)
 {
     spi_master_init(&(obj->TFT_t), CONFIG_MOSI_GPIO, CONFIG_SCLK_GPIO, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO, CONFIG_BL_GPIO);
@@ -417,4 +429,4 @@ void renderManagerRenderAllObject(RenderManager* obj)
 }
 */
 
-#endif /* _RENDERMANAGER_C_ */
+#endif /* _RENDER_C_ */
