@@ -11,6 +11,7 @@
 #ifndef _ENGINE_H_
 #define _ENGINE_H_
 
+<<<<<<< HEAD
 #include "Resource.h"
 #include "Render.h"
 #include "Keyboard.h"
@@ -54,5 +55,9 @@ void Engine_Render_removeObject(Engine *engine, RenderObject* renderObject);
 void Engine_Render_render(Engine *engine, RenderObject* renderObject);
 void Engine_Render_clear(Engine *engine);
 void Engine_Render_update(Engine *engine);
+=======
+#include "ResourceManager.h"
+#include "RenderManager.h"
+>>>>>>> 5cf654a1f1c36b7c9e50f5235b011ecb37ea1292
 
 #endif /* _ENGINE_H_ */
