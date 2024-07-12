@@ -11,6 +11,7 @@ This is a game engine designed for NTUEE game console.
    ├──include/
    │  ├──Engine.h
 <<<<<<< HEAD
+<<<<<<< HEAD
    │  ├──Joystick.h
    │  ├──Keyboard.h
    │  ├──Resource.h
@@ -22,11 +23,16 @@ This is a game engine designed for NTUEE game console.
    │  ├──Resource.c
    │  └──Render.c
 =======
+=======
+>>>>>>> 5cf654a1f1c36b7c9e50f5235b011ecb37ea1292
    │  ├──ResourceManager.h
    │  └──RenderManager.h
    ├──src/
    │  ├──ResourceManager.c
    │  └──RenderManager.c
+<<<<<<< HEAD
+>>>>>>> 5cf654a1f1c36b7c9e50f5235b011ecb37ea1292
+=======
 >>>>>>> 5cf654a1f1c36b7c9e50f5235b011ecb37ea1292
    ├──CMakeLists.txt
    └──README.md
