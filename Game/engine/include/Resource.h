@@ -1,11 +1,11 @@
 /*
-    ResourceManager.h
+    Resource.h
 
-    Class Resource and ResourceManager.
+    Class Resource and Resource.
 */
 
-#ifndef _RESOURCEMANAGER_H_
-#define _RESOURCEMANAGER_H_
+#ifndef _RESOURCE_H_
+#define _RESOURCE_H_
 
 #include <stdint.h>
 #define MAX_OBJECT_COUNT 20
@@ -59,10 +59,12 @@ typedef struct resourceManager
     void (*addResource)(struct resourceManager*, char[], RESOURCE_TYPE);
 }ResourceManager;
 
+ResourceManager* newResourceManager();
+void deleteResourceManager(ResourceManager*);
 //Constructor for ResourceManager
 void resourceManagerNew(ResourceManager*);
 Resource* resourceManagerFindResourceByID(ResourceManager*, uint8_t);
 Resource* resourceManagerFindResourceByName(ResourceManager*, char[]); 
 void resourceManagerAddResource(ResourceManager*, char[], RESOURCE_TYPE);
 
-#endif /* _RESOURCEMANAGER_H_ */
+#endif /* _RESOURCE_H_ */

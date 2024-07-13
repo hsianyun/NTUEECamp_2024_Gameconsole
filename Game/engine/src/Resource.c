@@ -1,14 +1,14 @@
 /*
-    ResourceManager.c
+    Resource.c
 
-    Functions of ResourceManager.h.
+    Functions of Resource.h.
 */
 
-#ifndef _RESOURCEMANAGER_C_
-#define _RESOURCEMANAGER_C_
+#ifndef _RESOURCE_C_
+#define _RESOURCE_C_
 
 #include <string.h>
-#include "../include/ResourceManager.h"
+#include "../include/Resource.h"
 
 /*
     Resource class
@@ -25,6 +25,18 @@ void resourceNew(Resource* obj, uint8_t ID, char name[], RESOURCE_TYPE type)
 /*
     ResourceManager class
 */
+ResourceManager* newResourceManager()
+{
+    ResourceManager* resourceManager = calloc(1, sizeof(ResourceManager));
+    resourceManagerNew(resourceManager);
+    return resourceManager;
+}
+
+void deleteResourceManager(ResourceManager* obj)
+{
+    if(obj != NULL) free(obj);
+}
+
 void resourceManagerNew(ResourceManager* obj)
 {
     obj->new = resourceManagerNew;
@@ -65,4 +77,4 @@ void resourceManagerAddResource(ResourceManager* obj, char name[], RESOURCE_TYPE
     return;
 }
 
-#endif /* _RESOURCEMANAGER_C_ */
+#endif /* _RESOURCE_C_ */

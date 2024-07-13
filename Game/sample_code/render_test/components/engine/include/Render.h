@@ -1,14 +1,14 @@
 /*
-    RenderManager.h
+    Render.h
 
     Class RenderResource, RenderObject and RenderManager.
 */
 
-#ifndef _RENDERMANAGER_H_
-#define _RENDERMANAGER_H_
+#ifndef _RENDER_H_
+#define _RENDER_H_
 
 #include <stdint.h>
-#include "./ResourceManager.h"
+#include "./Resource.h"
 
 //include library "st7789"
 #include "../../st7789/include/st7789.h"
@@ -91,6 +91,15 @@ typedef struct renderObject
     //constructor of RenderObject
     void (*new)(struct renderObject*, RenderResource*, int16_t, int16_t, uint8_t);
     
+    //Gets position (x direction)
+    int16_t (*getPosX)(struct renderObject*);
+
+    //Gets position (y direction)
+    int16_t (*getPosY)(struct renderObject*);
+
+    //Gets visible
+    uint8_t (*getVisible)(struct renderObject*);
+    
     //Sets position
     void (*setPos)(struct renderObject*, int16_t, int16_t);
     
@@ -114,6 +123,9 @@ typedef struct renderObject
 
 //constructor of RenderObject
 void renderObjectNew(RenderObject*, RenderResource*, int16_t, int16_t, uint8_t);
+int16_t renderObjectGetPosX(RenderObject*);
+int16_t renderObjectGetPosY(RenderObject*);
+uint8_t renderObjectGetVisible(RenderObject*);
 void renderObjectSetPos(RenderObject*, int16_t, int16_t);
 void renderObjectSetColor(RenderObject*, uint16_t);
 void renderObjectSetVisible(RenderObject*, uint8_t);
@@ -170,6 +182,8 @@ typedef struct renderManager
     //void (*renderAllObject)(struct renderManager*);
 }RenderManager;
 
+RenderManager* newRenderManager();
+void deleteRenderManager(RenderManager*);
 //constructor of RenderManager
 void renderManagerNew(RenderManager*);
 RenderResource* renderManagerFindRenderResourceByID(RenderManager*, uint8_t); 
@@ -191,4 +205,4 @@ void renderManagerUpdate(RenderManager*);
 //void renderManagerRenderAllText(RenderManager*);
 //void renderManagerRenderAllObject(RenderManager*);
 
-#endif /* _RENDERMANAGER_H_ */
+#endif /* _RENDER_H_ */

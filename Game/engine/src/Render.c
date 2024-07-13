@@ -1,17 +1,18 @@
 /*
-    ResourceManager.c
+    Render.c
 
-    Functions of RenderManager.h.
+    Functions of Render.h.
 */
 
-#ifndef _RENDERMANAGER_C_
-#define _RENDERMANAGER_C_
+#ifndef _RENDER_C_
+#define _RENDER_C_
 
 #include <string.h>
 #include <stdio.h>
+
 #include <math.h>
-#include "../include/ResourceManager.h"
-#include "../include/RenderManager.h"
+#include "../include/Resource.h"
+#include "../include/Render.h"
 
 //include library "st7789"
 #include "../../st7789/include/st7789.h"
@@ -40,6 +41,7 @@ void renderResourceNew(RenderResource* obj, uint8_t ID, Resource* resource, uint
 void renderResourceSetLoadFunction(RenderResource* obj, void (*function)(struct renderResource*, uint16_t*))
 {
     obj->loadImage = function;
+    obj->setUnloadFunction(obj, renderResourceUnloadImageHeapFree);
 }
 
 //Template for loading functions
@@ -61,7 +63,7 @@ void renderResourceLoadFont(RenderResource* obj)
 
 void renderResourceSetUnloadFunction(RenderResource* obj, void (*function)(struct renderResource*))
 {
-    obj->loadImage = function;
+    obj->unloadImage = function;
 }
 
 void renderResourceUnloadImageDefault(RenderResource* obj)
@@ -91,6 +93,9 @@ void renderObjectNew(RenderObject* obj, RenderResource* renderResource, int16_t 
     obj->mVisible = visible;
     //obj->mScale = scale;
     obj->new = renderObjectNew;
+    obj->getPosX = renderObjectGetPosX;
+    obj->getPosY = renderObjectGetPosY;
+    obj->getVisible = renderObjectGetVisible;
     obj->setPos = renderObjectSetPos;
     obj->setColor = renderObjectSetColor;
     obj->setVisible = renderObjectSetVisible;
@@ -99,6 +104,21 @@ void renderObjectNew(RenderObject* obj, RenderResource* renderResource, int16_t 
     obj->remove = renderObjectRemove;
     obj->render = renderObjectRender;
     return;
+}
+
+int16_t renderObjectGetPosX(RenderObject* obj)
+{
+    return obj->mPosX;
+}
+
+int16_t renderObjectGetPosY(RenderObject* obj)
+{
+    return obj->mPosY;
+}
+
+uint8_t renderObjectGetVisible(RenderObject* obj)
+{
+    return obj->mVisible;
 }
 
 void renderObjectSetPos(RenderObject* obj, int16_t posX, int16_t posY)
@@ -155,6 +175,18 @@ void renderObjectRender(RenderObject* obj, RenderManager* renderManager)
 /*
     RenderManager class
 */
+RenderManager* newRenderManager()
+{
+    RenderManager* renderManager = calloc(1, sizeof(RenderManager));
+    renderManagerNew(renderManager);
+    return renderManager;
+}
+
+void deleteRenderManager(RenderManager* obj)
+{
+    if(obj != NULL) free(obj);
+}
+
 void renderManagerNew(RenderManager* obj)
 {
     spi_master_init(&(obj->TFT_t), CONFIG_MOSI_GPIO, CONFIG_SCLK_GPIO, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO, CONFIG_BL_GPIO);
@@ -417,4 +449,4 @@ void renderManagerRenderAllObject(RenderManager* obj)
 }
 */
 
-#endif /* _RENDERMANAGER_C_ */
+#endif /* _RENDER_C_ */
