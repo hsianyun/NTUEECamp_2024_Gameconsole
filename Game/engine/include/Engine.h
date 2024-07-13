@@ -11,7 +11,6 @@
 #ifndef _ENGINE_H_
 #define _ENGINE_H_
 
-<<<<<<< HEAD
 #include "Resource.h"
 #include "Render.h"
 #include "Keyboard.h"
@@ -47,7 +46,6 @@ void Engine_Joystick_setThreshold(Engine *engine, uint8_t threshold);
 RenderResource* Engine_Render_findRenderResourceByID(Engine *engine, uint8_t ID); 
 RenderResource* Engine_Render_findRenderResourceByName(Engine *engine, char name[]); 
 void Engine_Render_addImage(Engine *engine, char name[], uint16_t* image, uint16_t width, uint16_t height);
-void Engine_Render_addImageByFunction(Engine *engine, char name[], void (*function)(RenderResource*, uint16_t*), uint16_t width, uint16_t height);
 RenderObject* Engine_Render_newObject(Engine *engine, char name[], int16_t posX, int16_t posY, uint8_t visible);
 void Engine_Render_deleteObject(Engine *engine, RenderObject* renderObject);
 void Engine_Render_addObject(Engine *engine, RenderObject* renderObject);   
@@ -55,9 +53,5 @@ void Engine_Render_removeObject(Engine *engine, RenderObject* renderObject);
 void Engine_Render_render(Engine *engine, RenderObject* renderObject);
 void Engine_Render_clear(Engine *engine);
 void Engine_Render_update(Engine *engine);
-=======
-#include "ResourceManager.h"
-#include "RenderManager.h"
->>>>>>> 5cf654a1f1c36b7c9e50f5235b011ecb37ea1292
 
 #endif /* _ENGINE_H_ */

@@ -111,11 +111,6 @@ void Engine_Render_addImage(Engine *engine, char name[], uint16_t* image, uint16
     renderManagerAddImage(engine->RenderManager, engine->ResourceManager, name, image, width, height);
 }
 
-void Engine_Render_addImageByFunction(Engine *engine, char name[], void (*function)(RenderResource*, uint16_t*), uint16_t width, uint16_t height)
-{
-    renderManagerAddImageByFunction(engine->RenderManager, engine->ResourceManager, name, function, width, height);
-}
-
 RenderObject* Engine_Render_newObject(Engine *engine, char name[], int16_t posX, int16_t posY, uint8_t visible)
 {
     RenderObject* renderObject = calloc(1, sizeof(RenderObject));
