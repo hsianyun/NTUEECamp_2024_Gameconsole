@@ -57,6 +57,7 @@ extern const uint16_t people[];
 
 Engine* gEngine;
 
+RenderObject *background;
 Person group[5];
 //----//
 
@@ -65,6 +66,8 @@ void init()
 {   
     gEngine = newEngine();
     Engine_Render_addImage(gEngine, "person", people, 50, 50);
+    Engine_Render_addImage(gEngine, "person2", people2, 50, 50);
+    Engine_Render_addImage(gEngine, "background", backgroundImage, 320, 240);
     Engine_Audio_addAudio(gEngine, "/spiffs/adf_music.mp3");
     Engine_Audio_addAudio(gEngine, "/spiffs/gunshot.mp3");
     Engine_Audio_addAudio(gEngine, "/spiffs/metalpipe.mp3");
@@ -79,10 +82,16 @@ void app_main(void)
 {   
     init();
 
+    background = Engine_Render_newObject(gEngine, "background", 0, 0, 1);
+    Engine_Render_addObject(gEngine, background);
     for(int i = 0; i < 5; i++)
     {
         newPerson(&group[i], gEngine, 20 * i + 1, 20 * i + 1);
         Engine_Render_addObject(gEngine, group[i].mRenderObject);
+    }
+    for(int i = 0; i < 2; i++)
+    {
+        Engine_Render_changeObjectImage(gEngine, group[i].mRenderObject, "person2");
     }
     
     while(1)

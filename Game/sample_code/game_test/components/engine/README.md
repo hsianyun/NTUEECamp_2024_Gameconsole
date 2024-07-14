@@ -37,3 +37,4 @@ For more usage of the engine, you can visit the [tutorial](https://hackmd.io/@uz
 ### Sample code
 
 [render_test](https://drive.google.com/file/d/1fSTIGNiYqWQUzMxRMaV6cDyT94TVNQgK/view?usp=sharing) (After building and flashing, you should see 5 people moving on the screen.)
+[game_test](https://drive.google.com/file/d/1jZySS14YEglS4SnAnsJl2v3xhdqH6Rue/view?usp=drive_link)

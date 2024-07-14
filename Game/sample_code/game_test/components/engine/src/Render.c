@@ -367,24 +367,81 @@ void renderManagerReadUp(RenderManager* obj, RenderObject* renderObject)
 
 void renderManagerReadFull(RenderManager* obj, RenderObject* renderObject)
 {
-    int16_t minX = renderObject->mPrePosX >= renderObject->mPosX ? renderObject->mPosX : renderObject->mPrePosX;
-    int16_t maxX = renderObject->mPrePosX <= renderObject->mPosX ? renderObject->mPosX : renderObject->mPrePosX;
-    int16_t minY = renderObject->mPrePosY >= renderObject->mPosY ? renderObject->mPosY : renderObject->mPrePosY;
-    int16_t maxY = renderObject->mPrePosY <= renderObject->mPosY ? renderObject->mPosY : renderObject->mPrePosY;
-    
-    obj->mScreen = calloc((maxX - minX + renderObject->mRenderResource->mWidth) * (maxY - minY + renderObject->mRenderResource->mHeight), sizeof(uint16_t));
+    int16_t fullPosX = renderObject->mPrePosX >= renderObject->mPosX ? renderObject->mPosX : renderObject->mPrePosX;
+    int16_t fullWidth = renderObject->mPrePosX + renderObject->mPosX - 2 * fullPosX + renderObject->mRenderResource->mWidth;
+    int16_t fullPosY = renderObject->mPrePosY >= renderObject->mPosY ? renderObject->mPosY : renderObject->mPrePosY;
+    int16_t fullHeight = renderObject->mPrePosY + renderObject->mPosY - 2 * fullPosY + renderObject->mRenderResource->mHeight;
     
     RenderObject currentNode = obj->mInitRenderObject;
-    while(currentNode.nextObj->mRenderResource != NULL)
+    if(fullWidth * fullHeight > (SCREEN_WIDTH * SCREEN_HEIGHT / 2))
     {
-        if(currentNode.nextObj->mVisible == 1)
+        if(fullHeight % 2 == 0)
         {
-            obj->copy(obj, currentNode.nextObj, minX, minY, maxX - minX + renderObject->mRenderResource->mWidth, maxY - minY + renderObject->mRenderResource->mHeight);
+            obj->mScreen = calloc(fullWidth * fullHeight / 2, sizeof(uint16_t));
+            while(currentNode.nextObj->mRenderResource != NULL)
+            {
+                if(currentNode.nextObj->mVisible == 1)
+                {
+                    obj->copy(obj, currentNode.nextObj, fullPosX, fullPosY, fullWidth, fullHeight / 2);
+                }
+                currentNode = *(currentNode.nextObj);
+            }
+            lcdDrawPNG(&(obj->TFT_t), fullPosX, fullPosY, obj->mScreen, fullWidth, fullHeight / 2);
+            free(obj->mScreen);
+            obj->mScreen = calloc(fullWidth * fullHeight / 2, sizeof(uint16_t));
+            currentNode = obj->mInitRenderObject;
+            while(currentNode.nextObj->mRenderResource != NULL)
+            {
+                if(currentNode.nextObj->mVisible == 1)
+                {
+                    obj->copy(obj, currentNode.nextObj, fullPosX, fullPosY + fullHeight / 2, fullWidth, fullHeight / 2);
+                }
+                currentNode = *(currentNode.nextObj);
+            }
+            lcdDrawPNG(&(obj->TFT_t), fullPosX, fullPosY + fullHeight / 2, obj->mScreen, fullWidth, fullHeight / 2);
+            free(obj->mScreen);
         }
-        currentNode = *(currentNode.nextObj);
+        else
+        {
+            obj->mScreen = calloc(fullWidth * (fullHeight / 2), sizeof(uint16_t));
+            while(currentNode.nextObj->mRenderResource != NULL)
+            {
+                if(currentNode.nextObj->mVisible == 1)
+                {
+                    obj->copy(obj, currentNode.nextObj, fullPosX, fullPosY, fullWidth, fullHeight / 2);
+                }
+                currentNode = *(currentNode.nextObj);
+            }
+            lcdDrawPNG(&(obj->TFT_t), fullPosX, fullPosY, obj->mScreen, fullWidth, fullHeight / 2);
+            free(obj->mScreen);
+            obj->mScreen = calloc(fullWidth * (fullHeight / 2 + 1), sizeof(uint16_t));
+            currentNode = obj->mInitRenderObject;
+            while(currentNode.nextObj->mRenderResource != NULL)
+            {
+                if(currentNode.nextObj->mVisible == 1)
+                {
+                    obj->copy(obj, currentNode.nextObj, fullPosX, fullPosY + fullHeight / 2, fullWidth, fullHeight / 2 + 1);
+                }
+                currentNode = *(currentNode.nextObj);
+            }
+            lcdDrawPNG(&(obj->TFT_t), fullPosX, fullPosY + fullHeight / 2, obj->mScreen, fullWidth, fullHeight / 2 + 1);
+            free(obj->mScreen);
+        }
     }
-    lcdDrawPNG(&(obj->TFT_t), minX, minY, obj->mScreen, maxX - minX + renderObject->mRenderResource->mWidth, maxY - minY + renderObject->mRenderResource->mHeight);
-    free(obj->mScreen);
+    else
+    {
+        obj->mScreen = calloc(fullWidth * fullHeight, sizeof(uint16_t));
+        while(currentNode.nextObj->mRenderResource != NULL)
+        {
+            if(currentNode.nextObj->mVisible == 1)
+            {
+                obj->copy(obj, currentNode.nextObj, fullPosX, fullPosY, fullWidth, fullHeight);
+            }
+            currentNode = *(currentNode.nextObj);
+        }
+        lcdDrawPNG(&(obj->TFT_t), fullPosX, fullPosY, obj->mScreen, fullWidth, fullHeight);
+        free(obj->mScreen);
+    }
     return;
 }
 
