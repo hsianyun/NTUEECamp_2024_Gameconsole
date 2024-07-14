@@ -96,6 +96,7 @@ void renderObjectNew(RenderObject* obj, RenderResource* renderResource, int16_t 
     obj->getPosX = renderObjectGetPosX;
     obj->getPosY = renderObjectGetPosY;
     obj->getVisible = renderObjectGetVisible;
+    obj->setImage = renderObjectSetImage;
     obj->setPos = renderObjectSetPos;
     obj->setColor = renderObjectSetColor;
     obj->setVisible = renderObjectSetVisible;
@@ -121,12 +122,19 @@ uint8_t renderObjectGetVisible(RenderObject* obj)
     return obj->mVisible;
 }
 
+void renderObjectSetImage(RenderObject* obj, RenderResource* renderResource)
+{
+    obj->mRenderResource = renderResource;
+    return;
+}
+
 void renderObjectSetPos(RenderObject* obj, int16_t posX, int16_t posY)
 {
     obj->mPrePosX = obj->mPosX;
     obj->mPrePosY = obj->mPosY;
     obj->mPosX = posX;
     obj->mPosY = posY;
+    return;
 }
 
 void renderObjectSetColor(RenderObject* obj, uint16_t color)

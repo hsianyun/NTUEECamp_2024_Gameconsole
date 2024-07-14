@@ -13,13 +13,15 @@ This is a game engine designed for NTUEE game console.
    │  ├──Joystick.h
    │  ├──Keyboard.h
    │  ├──Resource.h
-   │  └──Render.h
+   │  ├──Render.h
+   │  └──Audio.h
    ├──src/
    │  ├──Engine.c
    │  ├──Joystick.c
    │  ├──Keyboard.c
    │  ├──Resource.c
-   │  └──Render.c
+   │  ├──Render.c
+   │  └──Audio.c
    ├──CMakeLists.txt
    └──README.md
 ```
