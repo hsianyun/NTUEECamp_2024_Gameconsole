@@ -1,0 +1,5 @@
+.vscode
+**/build/
+**/managed_components/
+./CMakeLists.txt
+*.DS_Store
