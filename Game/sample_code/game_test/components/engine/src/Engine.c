@@ -1,6 +1,9 @@
 #include "Engine.h"
 #include "Keyboard.h"
 #include "Joystick.h"
+#include "Resource.h"
+#include "Render.h"
+#include "Audio.h"
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdint.h>
@@ -108,7 +111,7 @@ RenderResource* Engine_Render_findRenderResourceByName(Engine *engine, char name
     return renderManagerFindRenderResourceByName(engine->RenderManager, name);
 }
 
-void Engine_Render_addImage(Engine *engine, char name[], uint16_t* image, uint16_t width, uint16_t height)
+void Engine_Render_addImage(Engine *engine, char name[], const uint16_t* image, const uint16_t width, const uint16_t height)
 {
     renderManagerAddImage(engine->RenderManager, engine->ResourceManager, name, image, width, height);
 }
@@ -173,8 +176,8 @@ void Engine_Audio_addAudio(Engine *engine, char name[])
 void Engine_Audio_play(Engine *engine, char name[])
 {
     //Engine_Audio_handleAudioEvents(engine);
-    audioPlayerStop(engine->AudioPlayer);
-    audioPlayerPlay(engine->AudioPlayer, Engine_Audio_findAudioResourceByName(engine, name));
+    //audioPlayerStop(engine->AudioPlayer);
+    //audioPlayerPlay(engine->AudioPlayer, Engine_Audio_findAudioResourceByName(engine, name));
 }
 
 void Engine_Audio_stop(Engine *engine)

@@ -47,7 +47,7 @@ void Engine_Joystick_setThreshold(Engine *engine, uint8_t threshold);
 
 RenderResource* Engine_Render_findRenderResourceByID(Engine *engine, uint8_t ID); 
 RenderResource* Engine_Render_findRenderResourceByName(Engine *engine, char name[]); 
-void Engine_Render_addImage(Engine *engine, char name[], uint16_t* image, uint16_t width, uint16_t height);
+void Engine_Render_addImage(Engine *engine, char name[], const uint16_t* image, const uint16_t width, const uint16_t height);
 RenderObject* Engine_Render_newObject(Engine *engine, char name[], int16_t posX, int16_t posY, uint8_t visible);
 void Engine_Render_deleteObject(Engine *engine, RenderObject* renderObject);
 void Engine_Render_changeObjectImage(Engine *engine, RenderObject* renderObject, char name[]);

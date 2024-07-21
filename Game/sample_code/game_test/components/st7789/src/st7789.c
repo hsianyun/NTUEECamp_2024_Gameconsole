@@ -1187,7 +1187,7 @@ void lcdDrawPNG(TFT_t *dev, uint16_t x, uint16_t y, const uint16_t * PNG, int wi
 	uint16_t _height = height;
 	uint16_t _rows = 320-x-width;
 
-	uint16_t *colors = (uint16_t*)malloc(sizeof(uint16_t) * _width);
+	uint16_t *colors = (uint16_t*)malloc(sizeof(uint16_t) * _height);
 
 	for(int y = 0; y < _width; y++){
 		for(int x = 0;x < _height; x++){;

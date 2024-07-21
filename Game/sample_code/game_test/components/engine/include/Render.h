@@ -19,7 +19,7 @@
 #define MAX_TEXT_LENGTH 64
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
-#define TRANSPARENT 0x0001
+#define TRANSPARENT 0xffff
 
 typedef struct renderManager RenderManager;
 
@@ -42,10 +42,10 @@ typedef struct renderResource
     void (*new)(struct renderResource*, uint8_t, Resource*, uint16_t, uint16_t);
     
     //sets loadImage function
-    void (*setLoadFunction)(struct renderResource*, void (struct renderResource*, uint16_t*));
+    void (*setLoadFunction)(struct renderResource*, void (struct renderResource*, const uint16_t*));
 
     //loadImage function, load image. (for graphic object only)
-    void (*loadImage)(struct renderResource*, uint16_t*);
+    void (*loadImage)(struct renderResource*, const uint16_t*);
     //loadFont function, load font. (for text object only)
     //void (*loadFont)(struct renderResource*);
 
@@ -58,8 +58,8 @@ typedef struct renderResource
 
 //Constructor for RenderResource
 void renderResourceNew(RenderResource*, uint8_t, Resource*, uint16_t, uint16_t);
-void renderResourceSetLoadFunction(RenderResource*, void (struct renderResource*, uint16_t*));
-void renderResourceLoadImage(RenderResource*, uint16_t*);
+void renderResourceSetLoadFunction(RenderResource* , void (struct renderResource*, const uint16_t*));
+void renderResourceLoadImage(RenderResource*, const uint16_t*);
 //void renderResourceLoadFont(RenderResource*);
 void renderResourceSetUnloadFunction(RenderResource*, void (struct renderResource*));
 void renderResourceUnloadImageDefault(RenderResource*);
@@ -158,7 +158,7 @@ typedef struct renderManager
     RenderResource* (*findRenderResourceByName)(struct renderManager*, char[]); 
 
     //Adds Image type RenderResource, whose base class is also registered in the ResourceManager.
-    void (*addImage)(struct renderManager*, ResourceManager*, char[], uint16_t*, uint16_t, uint16_t);
+    void (*addImage)(struct renderManager*, ResourceManager*, char[], const uint16_t*, uint16_t, uint16_t);
     void (*addImageByFunction)(struct renderManager*, ResourceManager*, char[], void (RenderResource*, uint16_t*), uint16_t, uint16_t);
     //Adds Text type RenderResource (aka. font), whose base class is also registered in the ResourceManager.
     //void (*addFont)(struct renderManager*, ResourceManager*, char[]);
@@ -192,7 +192,7 @@ void deleteRenderManager(RenderManager*);
 void renderManagerNew(RenderManager*);
 RenderResource* renderManagerFindRenderResourceByID(RenderManager*, uint8_t); 
 RenderResource* renderManagerFindRenderResourceByName(RenderManager*, char[]); 
-void renderManagerAddImage(RenderManager*, ResourceManager*, char[], uint16_t*, uint16_t, uint16_t);
+void renderManagerAddImage(RenderManager*, ResourceManager*, char[], const uint16_t*, uint16_t, uint16_t);
 void renderManagerAddImageByFunction(RenderManager*, ResourceManager*, char[], void (RenderResource*, uint16_t*), uint16_t, uint16_t);
 //void renderManagerAddFont(RenderManager*, ResourceManager*, char[]);
 void renderManagerAddObject(RenderManager*, RenderObject*);   
